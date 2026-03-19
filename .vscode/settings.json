@@ -1,0 +1,6 @@
+{
+  "npm.scriptRunner": "bun",
+  "npm.exclude": [
+    "**/.reference/**"
+  ]
+}
