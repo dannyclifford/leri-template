@@ -5,6 +5,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
+    "refs:core": "bash scripts/fetch-all-refs.sh",
+    "skills:update": "DISABLE_TELEMETRY=1 npx skills update -p -y",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },

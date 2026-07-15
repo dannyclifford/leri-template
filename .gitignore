@@ -5,8 +5,8 @@ node_modules
 .pnp
 .pnp.js
 
-.ref/*/*
-.brain/*/*
+.ref/*
+!.ref/README.md
 
 # Local env files
 .env

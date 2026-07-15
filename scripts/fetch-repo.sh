@@ -2,12 +2,13 @@
 # Fetch external repos for AI-searchable reference
 # Usage: ./scripts/fetch-repo.sh <org/repo> <local-name> [branch]
 
-set -e
+set -euo pipefail
 
-REPO="$1"
-NAME="$2"
+REPO="${1:-}"
+NAME="${2:-}"
 BRANCH="${3:-main}"
-REF_DIR="$(dirname "$0")/../.ref"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+REF_DIR="$SCRIPT_DIR/../.ref"
 
 if [ -z "$REPO" ] || [ -z "$NAME" ]; then
   echo "Usage: $0 <org/repo> <local-name> [branch]"
@@ -17,7 +18,7 @@ fi
 
 TARGET="$REF_DIR/$NAME"
 
-# Create .reference if needed
+# Create .ref if needed
 mkdir -p "$REF_DIR"
 
 if [ -d "$TARGET" ]; then
