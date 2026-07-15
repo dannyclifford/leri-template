@@ -32,10 +32,8 @@ import { createHighlighter } from "shiki";
 
 // Shiki uses bitflags for font styles: 1=italic, 2=bold, 4=underline
 // biome-ignore lint/suspicious/noBitwiseOperators: shiki bitflag check
-// eslint-disable-next-line no-bitwise -- shiki bitflag check
 const isItalic = (fontStyle: number | undefined) => fontStyle && fontStyle & 1;
 // biome-ignore lint/suspicious/noBitwiseOperators: shiki bitflag check
-// eslint-disable-next-line no-bitwise -- shiki bitflag check
 // oxlint-disable-next-line eslint(no-bitwise)
 const isBold = (fontStyle: number | undefined) => fontStyle && fontStyle & 2;
 const isUnderline = (fontStyle: number | undefined) =>
@@ -396,9 +394,6 @@ export const CodeBlockContent = ({
   useEffect(() => {
     let cancelled = false;
 
-    // Reset to raw tokens when code changes (shows current code, not stale tokens)
-    setTokenized(highlightCode(code, language) ?? rawTokens);
-
     // Subscribe to async highlighting result
     highlightCode(code, language, (result) => {
       if (!cancelled) {
@@ -433,6 +428,7 @@ export const CodeBlock = ({
       <CodeBlockContainer className={className} language={language} {...props}>
         {children}
         <CodeBlockContent
+          key={`${language}:${code}`}
           code={code}
           language={language}
           showLineNumbers={showLineNumbers}
